@@ -1,0 +1,203 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    /*background-image: url('../images/Homepage.jpg');*/ /* Adjust the path to your image */
+    /*background-size: cover;*/
+    background-color: #ffdfe1;
+}
+
+/* styles.css */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+    .table th,
+    .table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #ff414e;
+        color: white;
+    }
+
+    .table tr:hover {
+        background-color: #fff2b3;
+    }
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+    .actions a {
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        color: #fff;
+    }
+
+        .actions a.edit {
+            background-color: #007bff;
+        }
+
+        .actions a.details {
+            background-color: #28a745;
+        }
+
+        .actions a.delete {
+            background-color: #dc3545;
+        }
+
+
+
+.form-floating {
+    border-radius: 50px;
+}
+
+#welcome-note1 {
+    font-family: 'Open Sans', monospace;
+    font-size: 80px;
+    color: #ffffff;
+}
+
+
+#welcome-note2 {
+    font-family: 'Open Sans', monospace;
+    color: #ffffff;
+    font-size: 100px;
+}
+
+#contact-form {
+    margin: 50px;
+    padding: 40px;
+}
+
+.btn {
+    background-color: #ff414e;
+    color: white;
+    font-weight: bold;
+}
+.btn:hover {
+        background-color: white;
+        color: #ff414e;
+}
+.cusbtn {
+    background-color: #ff414e;
+    color: white;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    width: 50%;
+    margin: 0 auto; /* Center the button horizontally */
+}
+    /*.cusbtn:hover {
+        background-color: white;
+        color: #ff414e;
+    }*/
+.log-div {
+    padding: 10px 15px;
+}
+#login-submit {
+    background-color: #ff414e;
+    color: white;
+}
+    #login-submit:hover {
+        background-color: white;
+        color: #ff414e;
+    }
+
+    #login-name:hover {
+        color: white;
+        font-weight: bold;
+    }
+
+#logout-submit {
+    background-color: #ff414e;
+    color: white;
+}
+
+.nav-pills > li > a {
+    color: black !important;
+}
+
+
+    .nav-pills > li > a.active {
+        background-color: #ff414e !important;
+        color: white !important;
+    }
+
+.custom-con {
+    background-image: url('../images/Homepage.jpg'); /* Adjust the path to your image */
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    /* Add other background styles as needed */
+}
+cus-main {
+    height: 100%;
+    width: 100%;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+#dropdownMenuLink {
+    padding-top: 10px;
+}
+
+.dropdown-menu::before{
+    content: '';
+    position: absolute;
+    top: -18px;
+    left: 65px;
+    border: 10px solid transparent;
+    border-bottom-color: white;
+}
+    /*.dropdown-menu::after {
+        content: '';
+        position: absolute;
+        top: -60px;
+        left: 30px;
+        border: 10px solid transparent;
+        border-bottom-color: white;
+    }*/
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+/*#dropdownMenuLink .bi-caret-down-fill {
+    visibility: visible;
+}
+
+#dropdownMenuLink:hover .bi-caret-down-fill,
+.dropdown-menu:hover .bi-caret-down-fill {
+    visibility: hidden;
+}*/
+
+.dropdown-menu a.dropdown-item:hover {
+    background-color: #fff2b3;
+    color: black;
+   
+}
+

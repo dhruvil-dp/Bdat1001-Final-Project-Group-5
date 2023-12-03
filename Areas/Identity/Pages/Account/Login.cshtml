@@ -1,0 +1,91 @@
+﻿@page
+@model ContactManager.Areas.Identity.Pages.Account.LoginModel
+@{
+    string primaryColor = "#550964";
+    ViewData["Title"] = "Log in";
+    string backgroundImage = "../images/Homepage.jpg";
+
+}
+
+<div class="container" >
+    <div class="row justify-content-around" style="margin-top:5%">
+        <div class="col-md-4">
+            <form id="account" method="post" class="card border-0 log-div" >
+                <h2 class="text-center mb-4" style="margin-top:10%">Login to your Account</h2>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" id="Input_Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3" style="position: relative;">
+                    <input asp-for="Input.Password" id="Input_Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                    <!-- Add the show/hide password button inside the input field -->
+                    <div class="eye-icon" id="eyehs" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);" onclick="togglePasswordVisibility()">
+                        <span id="eye-icon-text" style="cursor: pointer;">Show</span>
+                    </div>
+                </div>
+                <div class="form-check mb-3">
+                    <input style="color:@primaryColor" class="form-check-input" asp-for="Input.RememberMe" />
+                    <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button style=" id="login-submit" type="submit" class="cusbtn btn-lg" >Log in</button>
+                </div>
+                <div class="forgot-password text-center mt-3">
+                    <a asp-page="./ForgotPassword">Forgot your password?</a>
+                </div>
+                @* <div class="register text-center mt-3">
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                </div> *@
+                <div class="resend-confirmation text-center mt-3">
+                    <a asp-page="./ResendEmailConfirmation">Resend email confirmation -></a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script>
+
+    window.onload = function () {
+        var passwordInput = document.getElementById('Input_Password');
+        var eyeIcon = document.getElementById('eyehs');
+
+        // Initially hide the eye icon
+        eyeIcon.style.display = 'none';
+
+        // Add event listener for input on password field
+        passwordInput.oninput = function () {
+            // If password field is not empty, show the eye icon
+            if (passwordInput.value !== '') {
+                eyeIcon.style.display = 'block';
+            } else {
+                // If password field is empty, hide the eye icon
+                eyeIcon.style.display = 'none';
+            }
+        }
+    }
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("Input_Password");
+        var eyeIconText = document.getElementById("eye-icon-text");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIconText.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            eyeIconText.textContent = "Show";
+        }
+    }
+
+</script>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

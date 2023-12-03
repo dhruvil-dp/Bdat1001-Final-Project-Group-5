@@ -1,0 +1,101 @@
+@page
+@model ContactManager.Pages.Contacts.IndexModel
+
+@{
+
+    ViewData["Title"] = "Index";
+}
+
+<h1>Contact Details</h1>
+
+<p>
+    <a class="btn btn-success bi bi-person-plus-fill h2" asp-page="Create"> Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].Zip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact[0].Status)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contact)
+        {
+            <tr>
+                <td>
+                    <i class="bi bi-person-fill"></i>
+
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class="@item.Status">
+                    <style>
+                        .Approved {
+                            color: green;
+                        }
+
+                        .Rejected {
+                            color: red;
+                        }
+                    </style>
+
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if ((await AuthorizationService.AuthorizeAsync(
+User, item,
+ContactOperations.Update)).Succeeded)
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.ContactId"><span data-toggle="tooltip" title="edit" style="color:green" class="bi bi-pencil"></span></a>
+                        <text> | </text>
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.ContactId"><i data-toggle="tooltip" title="details" class="bi bi-journal-text"></i></a>
+
+                    @if ((await AuthorizationService.AuthorizeAsync(
+User, item,
+ContactOperations.Delete)).Succeeded)
+                    {
+                        <text> | </text>
+                        <a asp-page="./Delete" asp-route-id="@item.ContactId"><i data-toggle="tooltip" title="delete" style="color:red" class="bi bi-trash"></i></a>
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+

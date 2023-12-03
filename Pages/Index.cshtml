@@ -1,0 +1,49 @@
+﻿@page
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IndexModel
+
+@{
+
+    string primaryColor = "#550964";
+
+    ViewData["Title"] = "Home page";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    Response.Redirect("Contacts");
+
+}
+else
+{
+    <div class="text-center ">
+        <div class="index-page">
+            <div class="container mt-5">
+                <div class="col-md-5" style="width:100%;margin-top:10%">
+                    <div id="welcome-note2" class="container mt-10">
+                        Welcome!
+                    </div>
+                    <div class="row justify-content-center" style="margin-top:10%">
+
+
+                        <div class="col-md-3 ">
+                            <div class="d-grid gap-2">
+                                <a style=" id="login-submit" class="btn btn-lg" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="d-grid gap-2">
+                                <a style=" id="login-submit" class="btn btn-lg" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+}

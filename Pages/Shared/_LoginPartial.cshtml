@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+
+    string? email = User.Identity?.Name;
+    string? name = email?.Split('@')[0];
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+
+}
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @* <li class="nav-item">
+            <a class="nav-link text-light login-name" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage Profile">Hello @name!</a>
+        </li> *@
+        <li>
+            <div class="dropdown">
+                <a class="nav-link text-light login-name" href="#" id="dropdownMenuLink" title="Manage Profile" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hello @name!
+                    <i class="bi bi-caret-down-fill"></i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">View Profile</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Email">Email</a>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Password</a>
+                    @if (hasExternalLogins)
+                    {
+                        <a class="dropdown-item" asp-area="Identity" asp-page="./ExternalLogins">External logins</a>
+                    }
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })">Logout</a>
+                </div>
+            </div>
+        </li>
+        @* <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="btn logout-submit">Logout</button>
+            </form>
+        </li> *@
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        dropdownMenu.classList.toggle("show");
+    }
+    $(document).ready(function () {
+        $(".dropdown").mouseenter(function () {
+            $(".bi-caret-down-fill").css("visibility", "hidden");
+        });
+        $(".dropdown").mouseleave(function () {
+            $(".bi-caret-down-fill").css("visibility", "visible");
+        });
+    });
+</script>

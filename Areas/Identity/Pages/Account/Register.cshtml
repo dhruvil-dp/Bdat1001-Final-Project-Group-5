@@ -1,0 +1,116 @@
+﻿@page
+@model ContactManager.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<div class="row justify-content-around" style="margin-top:5%;">
+
+    <div class="col-md-4">
+
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="card border-0  log-div">
+            <h1 class="text-center mb-4" style="margin-top:10%">@ViewData["Title"]</h1>
+            <h2 class="text-center mb-4">
+                Create a new account.
+            </h2>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3" style="position: relative;">
+                <input asp-for="Input.Password" id="Input_Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.Password">Password</label>
+                
+
+                <!-- Add the show/hide password button inside the input field -->
+                <div class="eye-icon" id="eyehs" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);" onclick="togglePasswordVisibility('Input_Password')">
+                    <span id="eye-icon-text" style="cursor: pointer;">Show</span>
+                </div>
+                
+            </div>
+            <div>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+            </div>
+            <div class="form-floating mb-3" style="position: relative;">
+                <input asp-for="Input.ConfirmPassword" id="Input_ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                
+
+                <!-- Add the show/hide password button inside the input field -->
+                <div class="eye-icon" id="eyehs" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%);" onclick="togglePasswordVisibility('Input_ConfirmPassword')">
+                    <span id="eye-icon-text-confirm" style="cursor: pointer;">Show</span>
+                </div>
+                
+            </div>
+            <div>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+            </div>
+            <button id="registerSubmit" type="submit" class="cusbtn btn-lg ">Register</button>
+        </form>
+    </div>
+    
+</div>
+<script>
+    window.onload = function () {
+        var passwordInput = document.getElementById('Input_Password');
+        var confirmPasswordInput = document.getElementById('Input_ConfirmPassword');
+        var eyeIcon = document.getElementById('eyehs');
+        var eyeIconConfirm = document.getElementById('eye-icon-text-confirm');
+
+        // Initially hide the eye icons
+        eyeIcon.style.display = 'none';
+        eyeIconConfirm.style.display = 'none';
+
+        // Add event listener for input on password field
+        passwordInput.oninput = function () {
+            // If password field is not empty, show the eye icon
+            if (passwordInput.value !== '') {
+                eyeIcon.style.display = 'block';
+            } else {
+                // If password field is empty, hide the eye icon
+                eyeIcon.style.display = 'none';
+            }
+        }
+
+        // Add event listener for input on confirm password field
+        confirmPasswordInput.oninput = function () {
+            // If confirm password field is not empty, show the eye icon
+            if (confirmPasswordInput.value !== '') {
+                eyeIconConfirm.style.display = 'block';
+            } else {
+                // If confirm password field is empty, hide the eye icon
+                eyeIconConfirm.style.display = 'none';
+            }
+        }
+    }
+    function togglePasswordVisibility(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var eyeIconText = document.getElementById(inputId === 'Input_Password' ? 'eye-icon-text' : 'eye-icon-text-confirm');
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIconText.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            eyeIconText.textContent = "Show";
+        }
+        // if (errorSpan.textContent.trim() !== "") {
+        //     eyeIcon.style.top = '30%'; // Set the top position to 40% (change this according to your styles)
+        //     // Add more styling changes as needed
+        // } else {
+        //     eyeIcon.style.top = '50%'; // Reset the top position to 50%
+        //     // Reset other styling changes
+        // }
+    }
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
